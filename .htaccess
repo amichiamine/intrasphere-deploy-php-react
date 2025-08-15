@@ -1,0 +1,22 @@
+# IntraSphere - Configuration principale
+RewriteEngine On
+RewriteBase /intrasphere/
+
+# API - Redirection vers backend
+RewriteRule ^api/(.*)$ intrasphere-backend/public/index.php [L,QSA]
+
+# Uploads - Redirection vers backend
+RewriteRule ^uploads/(.*)$ intrasphere-backend/public/uploads/$1 [L]
+
+# Frontend - Routes React (SPA)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/intrasphere/api/
+RewriteCond %{REQUEST_URI} !^/intrasphere/uploads/
+RewriteCond %{REQUEST_URI} !^/intrasphere/intrasphere-backend/
+RewriteRule ^(.*)$ intrasphere-frontend/index.html [L]
+
+# Sécurité
+<Files ".env*">
+    Require all denied
+</Files>

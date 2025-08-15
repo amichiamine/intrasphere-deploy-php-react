@@ -1,0 +1,19 @@
+# IntraSphere Frontend - Routes React
+RewriteEngine On
+RewriteBase /intrasphere/
+
+# Routes React Router
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /intrasphere/index.html [L]
+
+# Cache des assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+</IfModule>
