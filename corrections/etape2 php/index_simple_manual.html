@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>IntraSphere - Portail d'Entreprise</title>
+    <link rel="stylesheet" href="./assets/index-CAmCCyH9.css">
+    <style>
+        .loading {
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100vh; flex-direction: column;
+            background: linear-gradient(135deg, #f8fafc, #eff6ff, #e0e7ff);
+        }
+        .loading h1 {
+            color: #8B5CF6; font-size: 2rem; margin-bottom: 20px;
+            background: linear-gradient(135deg, #8B5CF6, #A78BFA);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .loading p { color: #6B7280; margin-bottom: 20px; }
+        .spinner {
+            width: 40px; height: 40px; border: 3px solid #e5e7eb;
+            border-top: 3px solid #8B5CF6; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="loading">
+            <h1>IntraSphere</h1>
+            <p>Chargement de votre portail d'entreprise...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <script src="./assets/index-DP1xPCxU.js"></script>
+</body>
+</html>

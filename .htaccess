@@ -1,50 +1,24 @@
-# IntraSphere - Configuration Apache optimisée
+# IntraSphere - Configuration principale
 Options +FollowSymLinks -MultiViews -Indexes
 RewriteEngine On
 RewriteBase /intrasphere/
-
-# Sécurité - Bloquer accès aux fichiers sensibles
-<FilesMatch "\.(env|log|sql|md)$">
-    Require all denied
-</FilesMatch>
 
 # CORS pour API
 Header always set Access-Control-Allow-Origin "*"
 Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
 Header always set Access-Control-Allow-Headers "Content-Type, Authorization"
 
-# 1) API → Backend PHP
+# 1) API → Backend PHP (CRITIQUE)
 RewriteRule ^api/(.*)$ intrasphere-backend/public/index.php [L,QSA]
 
 # 2) Assets → Frontend assets
 RewriteRule ^assets/(.*)$ intrasphere-frontend/assets/$1 [L]
 
-# 3) Uploads → Backend uploads  
-RewriteRule ^uploads/(.*)$ intrasphere-backend/public/uploads/$1 [L]
+# 3) Static files → Frontend static
+RewriteRule ^static/(.*)$ intrasphere-frontend/static/$1 [L]
 
-# 4) SPA Fallback → Frontend index.html pour React Router
+# 4) SPA Fallback → Frontend pour React Router
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/intrasphere/api/
-RewriteCond %{REQUEST_URI} !^/intrasphere/uploads/
 RewriteRule ^.*$ intrasphere-frontend/index.html [L]
-
-# Cache et performance
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType image/png "access plus 1 year"
-    ExpiresByType image/jpg "access plus 1 year"
-    ExpiresByType image/jpeg "access plus 1 year"
-    ExpiresByType application/json "access plus 0 seconds"
-</IfModule>
-
-# Compression
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/plain
-    AddOutputFilterByType DEFLATE text/html
-    AddOutputFilterByType DEFLATE text/css
-    AddOutputFilterByType DEFLATE application/javascript
-    AddOutputFilterByType DEFLATE application/json
-</IfModule>

@@ -1,4 +1,22 @@
-<!DOCTYPE html>
+<?php
+// fix_react_frontend.php - Correction automatique pour cPanel
+echo "<h2>🔧 CORRECTION FRONTEND REACT INTRASPHERE</h2>";
+echo "<hr>";
+
+$base_path = "/home/zzdwczcx/public_html/intrasphere/";
+// ⚠️ IMPORTANT: Remplacez "username" par votre nom d'utilisateur cPanel
+
+// Backup de l'ancien index.html
+$index_file = $base_path . "index.html";
+if (file_exists($index_file)) {
+    $backup_name = "index-backup-" . date('Ymd-His') . ".html";
+    if (copy($index_file, $base_path . $backup_name)) {
+        echo "💾 Sauvegarde créée: " . $backup_name . "<br>";
+    }
+}
+
+// Créer le nouvel index.html avec React
+$new_index_content = '<!DOCTYPE html>
 <html lang="fr" dir="ltr">
 <head>
     <meta charset="utf-8">
@@ -43,4 +61,30 @@
     </div>
     <script src="./assets/index-DP1xPCxU.js"></script>
 </body>
-</html>
+</html>';
+
+// Écrire le fichier
+if (file_put_contents($index_file, $new_index_content)) {
+    echo "✅ index.html React créé avec succès<br>";
+} else {
+    echo "❌ Erreur lors de la création de index.html<br>";
+}
+
+// Vérifier les assets
+$css_file = $base_path . "intrasphere-frontend/assets/index-CAmCCyH9.css";
+$js_file = $base_path . "intrasphere-frontend/assets/index-DP1xPCxU.js";
+
+echo "<h3>🔍 Vérification des assets</h3>";
+echo file_exists($css_file) ? "✅ CSS trouvé<br>" : "❌ CSS manquant<br>";
+echo file_exists($js_file) ? "✅ JS trouvé<br>" : "❌ JS manquant<br>";
+
+// Définir les permissions
+chmod($index_file, 0644);
+
+echo "<h3>🧪 TESTS À EFFECTUER</h3>";
+echo "<a href='https://stacgate.com/intrasphere/' target='_blank'>1. Tester Frontend</a><br>";
+echo "<a href='https://stacgate.com/intrasphere/assets/index-CAmCCyH9.css' target='_blank'>2. Tester CSS</a><br>";
+echo "<a href='https://stacgate.com/intrasphere/assets/index-DP1xPCxU.js' target='_blank'>3. Tester JS</a><br>";
+
+echo "<hr><strong>✅ Correction terminée!</strong><br>";
+?>

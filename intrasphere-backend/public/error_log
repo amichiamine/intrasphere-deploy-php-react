@@ -17,3 +17,10 @@ Stack trace:
 [15-Aug-2025 19:21:10 UTC] PHP Warning:  Undefined variable $uri in /home/zzdwczcx/public_html/intrasphere/intrasphere-backend/api/Config/Router.php on line 40
 [15-Aug-2025 19:26:17 UTC] Router dispatch: method=GET, uri=/api/health
 [15-Aug-2025 20:15:02 UTC] Router dispatch: method=GET, uri=/api/health
+[15-Aug-2025 21:19:14 UTC] Router dispatch: method=GET, uri=/api/health
+[15-Aug-2025 22:49:53 UTC] PHP Fatal error:  Uncaught Error: Class "AuthController" not found in /home/zzdwczcx/public_html/intrasphere/intrasphere-backend/api/Config/Router.php:40
+Stack trace:
+#0 /home/zzdwczcx/public_html/intrasphere/intrasphere-backend/public/index.php(132): Router->dispatch()
+#1 {main}
+  thrown in /home/zzdwczcx/public_html/intrasphere/intrasphere-backend/api/Config/Router.php on line 40
+[15-Aug-2025 22:54:52 UTC] Router dispatch: method=GET, uri=/api/auth/me
